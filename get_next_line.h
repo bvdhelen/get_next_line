@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 21:43:27 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2024/11/26 17:59:51 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2024/11/26 20:53:01 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 13
+#endif
 
 char	*get_next_line(int fd);
 char	*ft_strjoin_gnl(char *s1, char *s2);
