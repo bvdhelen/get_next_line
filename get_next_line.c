@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 21:43:20 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2024/11/26 20:41:58 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:17:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,6 @@ static int	contains_newline(const char *buffer)
 	return (0);
 }
 
-static char	*append_to_buffer(char *s_buffer, char *backup_buffer)
-{
-	char	*join_buffer;
-
-	join_buffer = ft_strjoin_gnl(s_buffer, backup_buffer);
-	if (!join_buffer)
-	{
-		free (s_buffer);
-		return (NULL);
-	}
-	return (join_buffer);
-}
-
-static char	*handle_error(char *s_buffer, char *backup_buffer)
-{
-	free (s_buffer);
-	free (backup_buffer);
-	return (NULL);
-}
-
 static char	*fill_buffer(int fd, char *s_buffer)
 {
 	char	*backup_buffer;
@@ -57,20 +37,17 @@ static char	*fill_buffer(int fd, char *s_buffer)
 	while (!contains_newline(s_buffer))
 	{
 		bytes_read = read(fd, backup_buffer, BUFFER_SIZE);
-		if (bytes_read < 0)
-			return (handle_error(s_buffer, backup_buffer));
-		if (bytes_read == 0)
+		if (bytes_read <= 0)
 		{
 			free (backup_buffer);
+			if (bytes_read < 0 || !*s_buffer)
+				return (free (s_buffer), NULL);
 			return (s_buffer);
 		}
 		backup_buffer[bytes_read] = '\0';
-		s_buffer = append_to_buffer(s_buffer, backup_buffer);
+		s_buffer = ft_strjoin_gnl(s_buffer, backup_buffer);
 		if (!s_buffer)
-		{
-			free (backup_buffer);
-			return (NULL);
-		}
+			return (free (backup_buffer), NULL);
 	}
 	free (backup_buffer);
 	return (s_buffer);

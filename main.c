@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:56:48 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2024/11/26 20:53:54 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:46:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(void)
 	int		fd;
 	char	*line;
 
-	fd = open("tests/hola.txt", 0);
+	fd = open("tests/el_principito.txt", 0);
 	if (fd == 0)
 		return (0);
 	line = get_next_line(fd);

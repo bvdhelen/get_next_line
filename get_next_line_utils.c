@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 21:43:36 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2024/11/26 18:17:07 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:57:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,22 @@ size_t	ft_strlen_gnl(const char *s)
 	return (len);
 }
 
-void	ft_bzero_gnl(void *s, size_t n)
-{
-	unsigned char	*ptr;
-
-	ptr = (unsigned char *) s;
-	while (n > 0)
-	{
-		*ptr = 0;
-		ptr++;
-		n--;
-	}
-}
-
 void	*ft_calloc_gnl(size_t nmemb, size_t size)
 {
+	size_t			i;
 	size_t			total_size;
 	unsigned char	*allocated_mem;
 
 	total_size = nmemb * size;
 	allocated_mem = malloc (total_size);
-	if (allocated_mem == NULL)
+	if (!allocated_mem)
 		return (NULL);
-	ft_bzero_gnl(allocated_mem, total_size);
+	i = 0;
+	while (i < total_size)
+	{
+		allocated_mem[i] = 0;
+		i++;
+	}
 	return (allocated_mem);
 }
 

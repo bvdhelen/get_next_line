@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/06 21:43:46 by eldiaz-c          #+#    #+#              #
-#    Updated: 2024/11/06 21:55:39 by eldiaz-c         ###   ########.fr        #
+#    Updated: 2024/11/27 16:46:29 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,11 @@ CFLAGS = -Wall -Werror -Wextra
 # Archivos fuente y archivos objeto
 SOURCES = get_next_line.c get_next_line_utils.c
 
+BONUS_SOURCES = get_next_line_bonus.c get_next_line_utils_bonus.c
+
 OBJECTS = $(SOURCES:.c=.o)
+
+BONUS_OBJECTS = $(BONUS_SOURCES:.c=.o)
 
 # Archivo de encabezado
 INCLUDE = get_next_line.h
@@ -36,6 +40,10 @@ $(NAME): $(OBJECTS) $(INCLUDE)
 $(OBJECTS):
 		$(CC) -c $(CFLAGS) $(SOURCES)
 
+# Regla para crear los archivos bonus .o sin hacer relink
+bonus:
+		make SOURCES="$(SOURCES) $(BONUS_SOURCES)"
+
 # Eliminar todos los archivos .o y .a
 clean:
 		@rm -f $(OBJECTS)
@@ -46,4 +54,4 @@ fclean: clean
 re: fclean $(NAME)
 
 # Indica que las siguientes reglas no son archivos reales
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
